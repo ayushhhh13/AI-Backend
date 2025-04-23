@@ -11,3 +11,4 @@ numpy
 pandas
 pickle-mixin
 python-dotenv
+python-multipart

@@ -6,6 +6,7 @@ from utils.llm_helper import get_answer
 from utils.stt import speech_to_text
 from utils.tts import synthesize_speech
 import shutil
+import uvicorn
 
 app = FastAPI()
 
@@ -60,3 +61,10 @@ async def convert_text(payload: TTSRequest):
         media_type="audio/mpeg",
         headers={"Content-Disposition": "inline; filename=speech.mp3"},
     )
+
+@app.get("/")
+async def root():
+    return {"message": "Hello from Render!"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
