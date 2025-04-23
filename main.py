@@ -12,7 +12,7 @@ app = FastAPI()
 
 # CORS setup
 origins = [
-    "http://localhost:8080/*",
+    "https://pmhs.vercel.app/*",
     "http://127.0.0.1:8080",
     "*"
 ]
