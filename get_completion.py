@@ -1,6 +1,7 @@
 import openai
 from dotenv import load_dotenv
 import os 
+import json
 
 # Load environment variables
 load_dotenv()
@@ -13,7 +14,9 @@ openai.api_version = os.getenv("OPENAI_API_VERSION")
 assemblyai_api_key = os.getenv("ASSEMBLYAI_API_KEY")
 google_credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "/etc/secrets/google_credentials.json")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = google_credentials_path
-
+with open(os.environ["GOOGLE_APPLICATION_CREDENTIALS"]) as f:
+    creds = json.load(f)
+    print(f"Loaded Google Credentials for: {creds.get('client_email')}")
 if not openai.api_key:
     raise ValueError("OPENAI_API_KEY is missing from the .env file!")
 if not os.path.exists(google_credentials_path):
